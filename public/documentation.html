@@ -6,8 +6,64 @@
 </head>
 
 <body>
+  <h2>API Endpoints</h2>
   <p>The Movies API stores a vast number of movies and the actors who play in them.
     You can use it to identify actors/actresses and the movies they have played in.</p>
+  <table>
+    <tr>
+      <th>Request</th>
+      <th>URL</th>
+      <th>Return</th>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/movies</td>
+      <td>List of all movies</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/movies/{title}</td>
+      <td>Movie details (description, genre, director, image URL, featured)</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/genres/{name}</td>
+      <td>Genre details (description)</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/directors/{name}</td>
+      <td>Director details (bio, birth year, death year)</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>/users/register</td>
+      <td>JSON: { "username": "example", "password": "password" }</td>
+      <td>User registration status</td>
+    </tr>
+    <tr>
+      <td>PUT</td>
+      <td>/users/{userID}</td>
+      <td>JSON: { "username": "newUsername" }</td>
+      <td>User update status</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>/users/{userID}/favorites/add/{movieID}</td>
+      <td>Movie added to favorites</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>/users/{userID}/favorites/remove/{movieID}</td>
+      <td>Movie removed from favorites</td>
+    </tr>
+    <tr>
+      <td>DELETE</td>
+      <td>/users/{userID}</td>
+      <td>User deregistration status</td>
+    </tr>
+  </table>
+
 </body>
 
 </html>
