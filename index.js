@@ -48,16 +48,14 @@ app.use((err, req, res, next) => {
 });
 
 app.get('/movies', (req, res) => {
-  res.send('List of all movies');
-  res.json(movies);
+  res.json({message: 'List of all movies', movies: movies});
 });
 
 app.get('/movies/:title', (req, res) => {
   const title = req.params.title;
   const movie = movies.find((m) => m.title === title);
   if (movie) {
-    res.send(`Movie details for ${title}`);
-    res.json(movie);
+    res.json({message: 'Movie details for:', movie: movie});
   } else {
     res.status(404).json({ error: 'Movie not found' });
   }
@@ -77,9 +75,22 @@ app.post('/users/register', (req, res) => {
   res.send('User registration successful');
 });
 
+app.get('/users/:userID', (req, res) => {
+  const userID = req.params.userID;
+  user = users.find((u) => u.userID === u.userID);
+  res.json({message: 'User details for:', user: user});
+});
+
 app.put('/users/update/:userID', (req, res) => {
   const userID = req.params.userID;
-  res.send(`User information updated for userID: ${userID}`);
+  user = users.find((u) => u.userID === u.userID);
+  res.json({ message: `User details updated for:`, user: user});
+});
+
+app.delete('/users/delete/:userID', (req, res) => {
+  const userID = req.params.userID;
+  user = users.find((u) => u.userID === u.userID);
+  res.json({ message: `User deregistration successful for:`, user: user});
 });
 
 app.post('/users/:userID/favorites/add/:movieID', (req, res) => {
@@ -88,15 +99,10 @@ app.post('/users/:userID/favorites/add/:movieID', (req, res) => {
   res.send(`Movie added to favorites for userID: ${userID}`);
 });
 
-app.post('/users/:userID/favorites/remove/:movieID', (req, res) => {
+app.delete('/users/:userID/favorites/remove/:movieID', (req, res) => {
   const userID = req.params.userID;
   const movieID = req.params.movieID;
   res.send(`Movie removed from favorites for userID: ${userID}`);
-});
-
-app.delete('/users/delete/:userID', (req, res) => {
-  const userID = req.params.userID;
-  res.send(`User deregistration successful for userID: ${userID}`);
 });
 
 const PORT = 3000;

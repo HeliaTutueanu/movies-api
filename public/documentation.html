@@ -42,10 +42,21 @@
       <td>User registration status</td>
     </tr>
     <tr>
-      <td>PUT</td>
+      <td>GET</td>
       <td>/users/{userID}</td>
+      <td>JSON: { "username": "username" }</td>
+      <td>View user details</td>
+    </tr>
+    <tr>
+      <td>PUT</td>
+      <td>/users/update/{userID}</td>
       <td>JSON: { "username": "newUsername" }</td>
       <td>User update status</td>
+    </tr>
+    <tr>
+      <td>DELETE</td>
+      <td>/users/delete/{userID}</td>
+      <td>User deregistration status</td>
     </tr>
     <tr>
       <td>POST</td>
@@ -56,11 +67,6 @@
       <td>POST</td>
       <td>/users/{userID}/favorites/remove/{movieID}</td>
       <td>Movie removed from favorites</td>
-    </tr>
-    <tr>
-      <td>DELETE</td>
-      <td>/users/{userID}</td>
-      <td>User deregistration status</td>
     </tr>
   </table>
 
