@@ -7,13 +7,21 @@
 
 <body>
   <h2>API Endpoints</h2>
-  <p>The Movies API stores a vast number of movies and the actors who play in them.
-    You can use it to identify actors/actresses and the movies they have played in.</p>
   <table>
     <tr>
       <th>Request</th>
       <th>URL</th>
+      <th>JSON</th>
       <th>Return</th>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/</td>
+      <td>Welcome message</td>
+    </tr>
+    <tr>
+      <td>USE</td>
+      <td>Error message</td>
     </tr>
     <tr>
       <td>GET</td>
@@ -37,15 +45,21 @@
     </tr>
     <tr>
       <td>POST</td>
-      <td>/users/register</td>
+      <td>/users</td>
       <td>JSON: { "username": "example", "password": "password" }</td>
-      <td>User registration status</td>
+      <td>User registration</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/users/all</td>
+      <td>JSON: User.find({ })</td>
+      <td>View all users</td>
     </tr>
     <tr>
       <td>GET</td>
       <td>/users/{userID}</td>
       <td>JSON: { "username": "username" }</td>
-      <td>View user details</td>
+      <td>View specific user details</td>
     </tr>
     <tr>
       <td>PUT</td>

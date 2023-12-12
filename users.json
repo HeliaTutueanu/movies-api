@@ -1,0 +1,4 @@
+{"_id":{"$oid":"65781c61f7519e3e9e9272b6"},"Username":"John Dane","Password":"john1","Email":"john@gmail.com","Birthday":"Tue Dec 12 2023 10:40:01 GMT+0200 (Eastern European Standard Time)"}
+{"_id":{"$oid":"65781c71f7519e3e9e9272b7"},"Username":"Mayn Cloy","Password":"mayn1","Email":"mayn@gmail.com","Birthday":"Tue Dec 12 2023 10:40:17 GMT+0200 (Eastern European Standard Time)"}
+{"_id":{"$oid":"65781c7af7519e3e9e9272b8"},"Username":"Floren Valry","Password":"floren1","Email":"floren@gmail.com","Birthday":"Tue Dec 12 2023 10:40:26 GMT+0200 (Eastern European Standard Time)"}
+{"_id":{"$oid":"65781c82f7519e3e9e9272b9"},"Username":"Dorothy Kris","Password":"dorothy1","Email":"dorothy@gmail.com","Birtday":"Tue Dec 12 2023 10:40:34 GMT+0200 (Eastern European Standard Time)"}
