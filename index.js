@@ -14,8 +14,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // mongoose.connect('mongodb://localhost:27017/mvDB', { useNewUrlParser: true, useUnifiedTopology: true });
-const connectionURI = process.env.CONNECTION_URI;
-mongoose.connect(connectionURI, { useNewUrlParser: true, useUnifiedTopology: true });
+const connectionURI = process.env.CONNECTION_URI || 'mongodb://localhost:27017/mvDB';
+mongoose.connect(connectionURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('MongoDB connected successfully');
+    // ... rest of your code
+  })
+  .catch((error) => {
+    console.error('MongoDB connection error:', error);
+  });
+
 
 const Movie = Models.movies;
 const User = Models.users;
@@ -135,7 +143,7 @@ app.get('/directors/:name', passport.authenticate('jwt', { session: false }), as
     res.status(500).json({ error: 'Internal Server Error', details: error.message });
   }
 });
-
+const Users = mongoose.model('User', userSchema);
 app.post('/users/register', [   // creates user
   check('Username', 'Username is required').isLength({ min: 5 }),
   check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
@@ -148,7 +156,7 @@ app.post('/users/register', [   // creates user
     return res.status(422).json({ errors: errors.array() });
   }
   
-  let hashedPassword = User.hashPassword(req.body.Password);
+  let hashedPassword = Users.hashPassword(req.body.Password);
   await User.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
