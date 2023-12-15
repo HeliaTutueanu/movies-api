@@ -13,9 +13,8 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const connectionURI = process.env.CONNECTION_URI;
-// mongoose.connect('mongodb://localhost:27017/mvDB', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+const connectionURI = process.env.CONNECTION-URI;
+mongoose.connect(process.env.CONNECTION-URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const Movie = Models.movies;
 const User = Models.users;
