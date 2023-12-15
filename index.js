@@ -4,19 +4,50 @@ const morgan = require('morgan');
 const app = express();
 const bodyParser = require('body-parser');
 const Models = require('./models.js');
+const cors = require('cors');
+const bcrypt = require('bcrypt');
+const { check, validationResult } = require('express-validator');
 
 app.use(morgan('dev'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+      let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+}));
+
 const Movie = Models.movies;
 const User = Models.users;
 mongoose.connect('mongodb://localhost:27017/mvDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
-let auth = require('./auth')(app);
+let auth = require('./auth.js')(app);
 const passport = require('passport');
 require('./passport.js');
+
+let userSchema = mongoose.Schema({
+  Username: {type: String, required: true},
+  Password: {type: String, required: true},
+  Email: {type: String, required: true},
+  Birthday: Date,
+  FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
+});
+userSchema.statics.hashPassword = (password) => {
+  return bcrypt.hashSync(password, 10);
+};
+userSchema.methods.validatePassword = function(password) {
+  return bcrypt.compareSync(password, this.Password);
+};
+
+check('Username', 'Username contains non-alphanumeric characters - not allowed.').isAlphanumeric()
 
 
 app.get('/', (req, res) => {   // welcome
@@ -102,7 +133,19 @@ app.get('/directors/:name', passport.authenticate('jwt', { session: false }), as
   }
 });
 
-app.post('/users/register', async (req, res) => {   // creates userr
+app.post('/users/register',   [   // creates userr
+  check('Username', 'Username is required').isLength({min: 5}),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').not().isEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail()
+], async (req, res) => {
+
+  let errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+  
+  let hashedPassword = User.hashPassword(req.body.Password);
   await User.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
@@ -110,7 +153,7 @@ app.post('/users/register', async (req, res) => {   // creates userr
       } else {
         User.create({
             Username: req.body.Username,
-            Password: req.body.Password,
+            Password: hashedPassword,
             Email: req.body.Email,
             Birthday: req.body.Birthday
           })
@@ -205,7 +248,7 @@ app.delete('/users/:Username/favorites/remove/:MovieID', passport.authenticate('
 });
 
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0',() => {
+ console.log('Listening on Port ' + port);
 });
