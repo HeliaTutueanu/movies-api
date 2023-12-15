@@ -21,16 +21,7 @@ const Movie = Models.movies;
 const User = Models.users;
 
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
-app.use(cors({
-  origin: (origin, callback) => {
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
-      let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
-      return callback(new Error(message ), false);
-    }
-    return callback(null, true);
-  }
-}));
+app.use(cors());
 
 let auth = require('./auth.js')(app);
 const passport = require('passport');
@@ -136,8 +127,8 @@ app.get('/directors/:name', passport.authenticate('jwt', { session: false }), as
   }
 });
 
-app.post('/users/register',   [   // creates userr
-  check('Username', 'Username is required').isLength({min: 5}),
+app.post('/users/register', [   // creates user
+  check('Username', 'Username is required').isLength({ min: 5 }),
   check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
   check('Password', 'Password is required').not().isEmpty(),
   check('Email', 'Email does not appear to be valid').isEmail()
