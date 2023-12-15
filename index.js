@@ -13,6 +13,13 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const connectionURI = process.env.CONNECTION_URI;
+// mongoose.connect('mongodb://localhost:27017/mvDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+const Movie = Models.movies;
+const User = Models.users;
+
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 app.use(cors({
   origin: (origin, callback) => {
@@ -24,11 +31,6 @@ app.use(cors({
     return callback(null, true);
   }
 }));
-
-const Movie = Models.movies;
-const User = Models.users;
-// mongoose.connect('mongodb://localhost:27017/mvDB', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 let auth = require('./auth.js')(app);
 const passport = require('passport');
