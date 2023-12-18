@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const db = mongoose.connection;
+// bcrypt is a password hashing function 
+bcrypt = require('bcrypt');
 
 let movieSchema = mongoose.Schema({
     Title: {type: String, required: true},
