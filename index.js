@@ -68,7 +68,7 @@ app.use((err, req, res, next) => {   // error
   res.status(500).send('Oh no, it looks like something went wrong!');
 });
 
-app.get('/movies', async (req, res) => {   // gets all movies
+app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {   // gets all movies
   await Movie.find()
     .then((movies) => {
       res.status(201).json(movies);
