@@ -13,7 +13,6 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// mongoose.connect('mongodb://localhost:27017/mvDB', { useNewUrlParser: true, useUnifiedTopology: true });
 const connectionURI = process.env.CONNECTION_URI || 'mongodb://localhost:27017/mvDB';
 mongoose.connect(connectionURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
