@@ -148,6 +148,7 @@ app.get('/directors/:name', passport.authenticate('jwt', { session: false }), as
     res.status(500).json({ error: 'Internal Server Error', details: error.message });
   }
 });
+
 const Users = mongoose.model('User', userSchema);
 app.post('/users/register', [   // creates user
   check('Username', 'Username is required').isLength({ min: 5 }),
