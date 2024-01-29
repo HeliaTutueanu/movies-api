@@ -25,7 +25,7 @@ mongoose.connect(connectionURI, { useNewUrlParser: true, useUnifiedTopology: tru
 const Movie = Models.movies;
 const User = Models.users;
 
-let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'https://movies-api-sqg3.onrender.com'];
+let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'https://movies-api-sqg3.onrender.com', 'https://mymovies0.netlify.app'];
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
