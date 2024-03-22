@@ -25,7 +25,14 @@ mongoose.connect(connectionURI, { useNewUrlParser: true, useUnifiedTopology: tru
 const Movie = Models.movies;
 const User = Models.users;
 
-let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'https://movies-api-sqg3.onrender.com', 'https://mymovies0.netlify.app', 'https://HeliaTutueanu.github.io', 'https://HeliaTutueanu.github.io/movies-api-angular-client/welcome', 'https://HeliaTutueanu.github.io/movies-api-angular-client/movies', 'https://HeliaTutueanu.github.io/movies-api-angular-client/profile'];
+let allowedOrigins =
+['http://localhost:8080', 'http://localhost:1234', 'https://movies-api-sqg3.onrender.com',
+'https://mymovies0.netlify.app', 'https://HeliaTutueanu.github.io', 'http://localhost:4200',
+'http://localhost:4200/welcome', 'http://localhost:4200/movies', 'http://localhost:4200/profile',
+'https://HeliaTutueanu.github.io/movies-api-angular-client/welcome',
+'https://HeliaTutueanu.github.io/movies-api-angular-client/movies',
+'https://HeliaTutueanu.github.io/movies-api-angular-client/profile'];
+
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
