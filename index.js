@@ -27,6 +27,9 @@ const User = Models.users;
 
 let allowedOrigins =
 ['http://localhost:8080', 'http://localhost:1234', 'https://movies-api-sqg3.onrender.com',
+'https://movies-api-sqg3.onrender.com/users/register',
+'https://movies-api-sqg3.onrender.com/users/login',
+'https://heliatutueanu.github.io',
 'https://mymovies0.netlify.app', 'https://HeliaTutueanu.github.io', 'http://localhost:4200',
 'http://localhost:4200/welcome', 'http://localhost:4200/movies', 'http://localhost:4200/profile',
 'https://HeliaTutueanu.github.io/movies-api-angular-client/welcome',
