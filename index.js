@@ -26,15 +26,20 @@ const Movie = Models.movies;
 const User = Models.users;
 
 let allowedOrigins =
-['http://localhost:8080', 'http://localhost:1234', 'https://movies-api-sqg3.onrender.com',
+['http://localhost:8080', 'http://localhost:1234', 'http://localhost:4200',
+'http://localhost:4200/welcome',
+'https://movies-api-sqg3.onrender.com',
 'https://movies-api-sqg3.onrender.com/users/register',
 'https://movies-api-sqg3.onrender.com/users/login',
 'https://heliatutueanu.github.io',
-'https://mymovies0.netlify.app', 'https://HeliaTutueanu.github.io', 'http://localhost:4200',
-'http://localhost:4200/welcome', 'http://localhost:4200/movies', 'http://localhost:4200/profile',
+'https://mymovies0.netlify.app',
+'https://mymovies0.netlify.app/signup',
+'https://mymovies0.netlify.app/login',
+'https://heliatutueanu.github.io/movies-api-angular-app',
 'https://HeliaTutueanu.github.io/movies-api-angular-client/welcome',
 'https://HeliaTutueanu.github.io/movies-api-angular-client/movies',
-'https://HeliaTutueanu.github.io/movies-api-angular-client/profile'];
+'https://HeliaTutueanu.github.io/movies-api-angular-client/profile'
+];
 
 app.use(cors({
   origin: (origin, callback) => {
